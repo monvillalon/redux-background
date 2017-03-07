@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Promise from 'bluebird';
-import { addDaemon, stopJob, removeJob } from '../../src/actions';
+import { startDaemon, stopJob, removeJob } from '../../src/actions';
 import './App.css';
 
 class App extends Component {
@@ -63,7 +63,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     onStart() {
-      dispatch(addDaemon('random', createRandomNumber, {
+      dispatch(startDaemon('random', createRandomNumber, {
         data: {
           min: 0,
           max: 10,
