@@ -10,7 +10,7 @@ import {
   JOB_REMOVED,
 } from './types';
 
-export const addJob = (name, fn, meta = {}) => {
+export const startJob = (name, fn, meta = {}) => {
   return {
     type: JOB_ADD,
     payload: { name, fn },
@@ -18,7 +18,7 @@ export const addJob = (name, fn, meta = {}) => {
   };
 };
 
-export const addDaemon = (name, fn, meta = {}) => {
+export const startDaemon = (name, fn, meta = {}) => {
   return {
     type: JOB_ADD,
     payload: { name, fn },
@@ -70,8 +70,8 @@ export const removeJob = name => ({
 });
 
 export default {
-  addJob,
-  addDaemon,
+  startJob,
+  startDaemon,
   jobAdded,
   jobStarted,
   jobProgress,
