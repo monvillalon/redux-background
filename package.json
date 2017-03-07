@@ -1,6 +1,6 @@
 {
   "name": "redux-background",
-  "version": "0.9.0",
+  "version": "0.9.1",
   "description": "Execute background tasks with redux",
   "author": "Jose R Villalon Soler",
   "main": "build/index.js",
@@ -13,9 +13,7 @@
     "build": "npm run clean; NODE_ENV=production babel -d ./build ./src -s"
   },
   "license": "MIT",
-  "dependencies": {
-
-  },
+  "dependencies": {},
   "peerDependencies": {
     "redux": "*"
   },
