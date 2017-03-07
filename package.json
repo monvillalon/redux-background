@@ -5,7 +5,7 @@
   "author": "Jose R Villalon Soler",
   "main": "build/index.js",
   "repository": {
-    "url": "git@github.com:monvillalon/react-page-layout.git",
+    "url": "git@github.com:monvillalon/redux-background.git",
     "type": "git"
   },
   "scripts": {
