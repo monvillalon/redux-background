@@ -1,6 +1,6 @@
 {
   "name": "redux-background",
-  "version": "0.9.1",
+  "version": "0.9.2",
   "description": "Execute background tasks with redux",
   "author": "Jose R Villalon Soler",
   "main": "build/index.js",
