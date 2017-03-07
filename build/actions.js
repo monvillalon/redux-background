@@ -3,13 +3,13 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.removeJob = exports.jobStopped = exports.stopJob = exports.jobFinished = exports.jobProgress = exports.jobStarted = exports.jobAdded = exports.addDaemon = exports.addJob = undefined;
+exports.removeJob = exports.jobStopped = exports.stopJob = exports.jobFinished = exports.jobProgress = exports.jobStarted = exports.jobAdded = exports.startDaemon = exports.startJob = undefined;
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var _types = require('./types');
 
-var addJob = exports.addJob = function addJob(name, fn) {
+var startJob = exports.startJob = function startJob(name, fn) {
   var meta = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
 
   return {
@@ -19,7 +19,7 @@ var addJob = exports.addJob = function addJob(name, fn) {
   };
 };
 
-var addDaemon = exports.addDaemon = function addDaemon(name, fn) {
+var startDaemon = exports.startDaemon = function startDaemon(name, fn) {
   var meta = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
 
   return {
@@ -87,8 +87,8 @@ var removeJob = exports.removeJob = function removeJob(name) {
 };
 
 exports.default = {
-  addJob: addJob,
-  addDaemon: addDaemon,
+  startJob: startJob,
+  startDaemon: startDaemon,
   jobAdded: jobAdded,
   jobStarted: jobStarted,
   jobProgress: jobProgress,
