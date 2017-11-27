@@ -7,24 +7,20 @@ import {
   JOB_STOP,
   JOB_STOPPED,
   JOB_REMOVE,
-  JOB_REMOVED,
+  JOB_TIMEOUT_ID,
 } from './types';
 
-export const startJob = (name, fn, meta = {}) => {
-  return {
-    type: JOB_ADD,
-    payload: { name, fn },
-    meta,
-  };
-};
+export const startJob = (name, fn, meta = {}) => ({
+  type: JOB_ADD,
+  payload: { name, fn },
+  meta,
+});
 
-export const startDaemon = (name, fn, meta = {}) => {
-  return {
-    type: JOB_ADD,
-    payload: { name, fn },
-    meta: { ...meta, maxTimes: Infinity },
-  };
-};
+export const startDaemon = (name, fn, meta = {}) => ({
+  type: JOB_ADD,
+  payload: { name, fn },
+  meta: { ...meta, maxTimes: Infinity },
+});
 
 export const jobAdded = (name, meta) => ({
   type: JOB_ADDED,
@@ -69,6 +65,12 @@ export const removeJob = name => ({
   meta: {},
 });
 
+export const jobTimeoutId = (name, timeoutId) => ({
+  type: JOB_TIMEOUT_ID,
+  payload: { name },
+  meta: { timeoutId },
+});
+
 export default {
   startJob,
   startDaemon,
@@ -79,4 +81,5 @@ export default {
   stopJob,
   jobStopped,
   removeJob,
+  jobTimeoutId,
 };

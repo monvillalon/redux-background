@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.removeJob = exports.jobStopped = exports.stopJob = exports.jobFinished = exports.jobProgress = exports.jobStarted = exports.jobAdded = exports.startDaemon = exports.startJob = undefined;
+exports.jobTimeoutId = exports.removeJob = exports.jobStopped = exports.stopJob = exports.jobFinished = exports.jobProgress = exports.jobStarted = exports.jobAdded = exports.startDaemon = exports.startJob = undefined;
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -11,7 +11,6 @@ var _types = require('./types');
 
 var startJob = exports.startJob = function startJob(name, fn) {
   var meta = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
-
   return {
     type: _types.JOB_ADD,
     payload: { name: name, fn: fn },
@@ -21,7 +20,6 @@ var startJob = exports.startJob = function startJob(name, fn) {
 
 var startDaemon = exports.startDaemon = function startDaemon(name, fn) {
   var meta = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
-
   return {
     type: _types.JOB_ADD,
     payload: { name: name, fn: fn },
@@ -86,6 +84,14 @@ var removeJob = exports.removeJob = function removeJob(name) {
   };
 };
 
+var jobTimeoutId = exports.jobTimeoutId = function jobTimeoutId(name, timeoutId) {
+  return {
+    type: _types.JOB_TIMEOUT_ID,
+    payload: { name: name },
+    meta: { timeoutId: timeoutId }
+  };
+};
+
 exports.default = {
   startJob: startJob,
   startDaemon: startDaemon,
@@ -95,6 +101,7 @@ exports.default = {
   jobFinished: jobFinished,
   stopJob: stopJob,
   jobStopped: jobStopped,
-  removeJob: removeJob
+  removeJob: removeJob,
+  jobTimeoutId: jobTimeoutId
 };
 //# sourceMappingURL=actions.js.map

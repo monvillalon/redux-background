@@ -11,6 +11,7 @@ var JOB_FINISHED = exports.JOB_FINISHED = '@background/finished';
 var JOB_STOP = exports.JOB_STOP = '@background/stop';
 var JOB_STOPPED = exports.JOB_STOPPED = '@background/stopped';
 var JOB_REMOVE = exports.JOB_REMOVE = '@background/remove';
+var JOB_TIMEOUT_ID = exports.JOB_TIMEOUT_ID = '@background/timeoutId';
 
 exports.default = {
   JOB_ADD: JOB_ADD,
@@ -20,6 +21,7 @@ exports.default = {
   JOB_FINISHED: JOB_FINISHED,
   JOB_STOP: JOB_STOP,
   JOB_STOPPED: JOB_STOPPED,
-  JOB_REMOVE: JOB_REMOVE
+  JOB_REMOVE: JOB_REMOVE,
+  JOB_TIMEOUT_ID: JOB_TIMEOUT_ID
 };
 //# sourceMappingURL=types.js.map

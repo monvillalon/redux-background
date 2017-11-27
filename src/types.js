@@ -6,6 +6,7 @@ export const JOB_FINISHED = '@background/finished';
 export const JOB_STOP = '@background/stop';
 export const JOB_STOPPED = '@background/stopped';
 export const JOB_REMOVE = '@background/remove';
+export const JOB_TIMEOUT_ID = '@background/timeoutId';
 
 export default {
   JOB_ADD,
@@ -16,4 +17,5 @@ export default {
   JOB_STOP,
   JOB_STOPPED,
   JOB_REMOVE,
+  JOB_TIMEOUT_ID,
 };

@@ -1,4 +1,4 @@
-import { JOB_ADDED, JOB_STARTED, JOB_PROGRESS, JOB_FINISHED, JOB_STOPPED, JOB_REMOVE } from './types';
+import { JOB_ADDED, JOB_STARTED, JOB_PROGRESS, JOB_FINISHED, JOB_STOPPED, JOB_REMOVE, JOB_TIMEOUT_ID } from './types';
 
 export default function reducer(state = {}, action) {
   switch (action.type) {
@@ -17,6 +17,7 @@ export default function reducer(state = {}, action) {
         value: null,
         error: null,
         progress: null,
+        timeoutId: null,
         ...meta,
       };
       return { ...state, [name]: item };
@@ -87,6 +88,14 @@ export default function reducer(state = {}, action) {
       const newState = { ...state };
       delete newState[name];
       return newState;
+    }
+    case JOB_TIMEOUT_ID: {
+      const { payload, meta } = action;
+      const { name } = payload;
+      const { timeoutId } = meta;
+      const item = state[name];
+      const newItem = { ...item, timeoutId };
+      return { ...state, [name]: newItem };
     }
     default: {
       return state;

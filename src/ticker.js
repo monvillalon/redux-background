@@ -1,5 +1,5 @@
 import createExecutor from './executor';
-import { jobAdded, jobStarted, jobProgress, jobFinished, jobStopped, removeJob } from './actions';
+import { jobAdded, jobStarted, jobProgress, jobFinished, jobStopped, removeJob, jobTimeoutId } from './actions';
 
 const createTicker = (dispatch, getState, name, fn, opts = {}) => () => {
   let isStopped = false;
@@ -24,7 +24,16 @@ const createTicker = (dispatch, getState, name, fn, opts = {}) => () => {
     },
   };
 
-  const stopFn = (b) => { isStopped = true; removeAfterStop = b; };
+  const stopFn = (b) => {
+    isStopped = true;
+    removeAfterStop = b;
+    if (b) {
+      const state = getState();
+      if (state.background[name]) {
+        clearTimeout(state.background[name].timeoutId);
+      }
+    }
+  };
   const executor = createExecutor(fn, job, dispatch, getState);
   const scheduler = () => {
     dispatch(jobStarted(name, Date.now()));
@@ -46,7 +55,8 @@ const createTicker = (dispatch, getState, name, fn, opts = {}) => () => {
           dispatch(jobStopped(name));
         }
       } else {
-        setTimeout(scheduler, interval);
+        const timeoutId = setTimeout(scheduler, interval);
+        dispatch(jobTimeoutId(name, timeoutId));
       }
     });
   };
@@ -55,7 +65,8 @@ const createTicker = (dispatch, getState, name, fn, opts = {}) => () => {
   dispatch(jobAdded(name, { interval, maxTimes }));
 
   // Start the ticker
-  setTimeout(scheduler, 0);
+  const timeoutId = setTimeout(scheduler, 0);
+  dispatch(jobTimeoutId(name, timeoutId));
 
   // Return stopJob function
   return stopFn;

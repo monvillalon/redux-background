@@ -34,7 +34,8 @@ function reducer() {
           stoppedOn: null,
           value: null,
           error: null,
-          progress: null
+          progress: null,
+          timeoutId: null
         }, meta);
         return _extends({}, state, _defineProperty({}, name, item));
       }
@@ -116,6 +117,17 @@ function reducer() {
         var newState = _extends({}, state);
         delete newState[_name5];
         return newState;
+      }
+    case _types.JOB_TIMEOUT_ID:
+      {
+        var _payload6 = action.payload,
+            _meta4 = action.meta;
+        var _name6 = _payload6.name;
+        var timeoutId = _meta4.timeoutId;
+
+        var _item5 = state[_name6];
+        var _newItem4 = _extends({}, _item5, { timeoutId: timeoutId });
+        return _extends({}, state, _defineProperty({}, _name6, _newItem4));
       }
     default:
       {

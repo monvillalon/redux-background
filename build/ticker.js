@@ -42,7 +42,14 @@ var createTicker = function createTicker(dispatch, getState, name, fn) {
     };
 
     var stopFn = function stopFn(b) {
-      isStopped = true;removeAfterStop = b;
+      isStopped = true;
+      removeAfterStop = b;
+      if (b) {
+        var state = getState();
+        if (state.background[name]) {
+          clearTimeout(state.background[name].timeoutId);
+        }
+      }
     };
     var executor = (0, _executor2.default)(fn, job, dispatch, getState);
     var scheduler = function scheduler() {
@@ -65,7 +72,8 @@ var createTicker = function createTicker(dispatch, getState, name, fn) {
             dispatch((0, _actions.jobStopped)(name));
           }
         } else {
-          setTimeout(scheduler, interval);
+          var _timeoutId = setTimeout(scheduler, interval);
+          dispatch((0, _actions.jobTimeoutId)(name, _timeoutId));
         }
       });
     };
@@ -74,7 +82,8 @@ var createTicker = function createTicker(dispatch, getState, name, fn) {
     dispatch((0, _actions.jobAdded)(name, { interval: interval, maxTimes: maxTimes }));
 
     // Start the ticker
-    setTimeout(scheduler, 0);
+    var timeoutId = setTimeout(scheduler, 0);
+    dispatch((0, _actions.jobTimeoutId)(name, timeoutId));
 
     // Return stopJob function
     return stopFn;
